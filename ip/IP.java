@@ -580,7 +580,9 @@ public class IP extends IPBase {
                 if(gray < 0) gray *= -1;
                 gray = Math.max(Math.min(255, gray), 0);
 
+            
                 intermediate.setRGB(x, y, new Color(gray, gray, gray).getRGB());
+                
             }
         }
 

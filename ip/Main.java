@@ -42,9 +42,9 @@ public class Main {
       Kernel kernel = new Kernel(identityKernel);
 
       new ICon("./images/wolf.jpg")
-      //.exec(i->i.toGrayscale())
+      
       .exec(i->i.applyKernel(kernel))
-      .save("./newOut/wolfKernel.png");
+      .save("./Wolf/wolfKernel.png");
 
 
       //Trival Box Blur
@@ -55,9 +55,9 @@ public class Main {
       Kernel boxKernel = new Kernel(boxKernelFloats).normalize();
 
       new ICon("./images/wolf.jpg")
-      //.exec(i->i.toGrayscale())
+      
       .exec(i->i.applyKernel(boxKernel))
-      .save("./newOut/wolf_box_kernel.png");
+      .save("./Wolf/wolf_box_kernel.png");
 
       // Motion Blur
       float[][] motionKernelFloats = new float[9][9];
@@ -72,16 +72,42 @@ public class Main {
       motionKernelFloats[8] = new float[]{0,0,0,0,0,0,0,0,1};
       Kernel motionKernel = new Kernel(motionKernelFloats).normalize();
 
-      new ICon("./images/wolf.jpg")
-      //.exec(i->i.toGrayscale())
+      new ICon("./images/Husker.jpg")
+      
       .exec(i->i.applyKernel(motionKernel))
-      .save("./newOut/wolf_motionBlur_kernel.png");
+      .save("./Husker/Husker_motionBlur_kernel.png");
+
+      // Excessive Edge Sharpen
+      float[][] EdgeSharpenKernelFloats = new float[5][5];
+      EdgeSharpenKernelFloats[0] = new float[]{1,1,1};
+      EdgeSharpenKernelFloats[1] = new float[]{1,-7,1};
+      EdgeSharpenKernelFloats[2] = new float[]{1,1,1};
+      
+      Kernel EdgeSharpenKernel = new Kernel(EdgeSharpenKernelFloats).normalize();
+
+      new ICon("./images/Husker.jpg")
+      
+      .exec(i->i.applyKernel(EdgeSharpenKernel))
+      .save("./Husker/Husker_EdgeSharpen_kernel.png");
+
+      // Emboss
+      float[][] EmbossKernelFloats = new float[3][3];
+      EmbossKernelFloats[0] = new float[]{-1,0,1};
+      EmbossKernelFloats[1] = new float[]{-2,0,2};
+      EmbossKernelFloats[2] = new float[]{-1,0,1};
+      
+      Kernel EmbossKernel = new Kernel(EmbossKernelFloats).normalize();
+
+      new ICon("./images/wolf.jpg")
+      
+      .exec(i->i.applyKernel(EmbossKernel))
+      .save("./Wolf/wolf_Emboss_kernel.png");
 
       //Larger Box Blur
       new ICon("./images/wolf.jpg")
-      .exec(i->i.toGrayscale())
+      
       .exec(i->i.applyKernel(boxKernel))
-      .save("./newOut/wolfkernel1.png");
+      .save("./Wolf/wolfkernel1.png");
 
       // Edge Detection
       float[][] edgeKernelVFloats = new float[3][1];
@@ -89,19 +115,19 @@ public class Main {
       edgeKernelVFloats[1] = new float[]{0};
       edgeKernelVFloats[2] = new float[]{-1};
       Kernel edgeKernelV = new Kernel(edgeKernelVFloats);
-      new ICon("./images/wolf.jpg")
-      .exec(i->i.toGrayscale())
+      new ICon("./images/Husker.jpg")
+      
       .exec(i->i.applyKernel(edgeKernelV))
-      .save("./newOut/wolf_edge_kernelV.png");
+      .save("./Husker/Husker_edge_kernelV.png");
 
       //Edge Detection the other way
       float[][] edgeKernelHFloats = new float[1][3];
       edgeKernelHFloats[0] = new float[]{1,0,-1};
       Kernel edgeKernelH = new Kernel(edgeKernelHFloats);
-      new ICon("./images/wolf.jpg")
-      .exec(i->i.toGrayscale())
+      new ICon("./images/Husker.jpg")
+      
       .exec(i->i.applyKernel(edgeKernelH))
-      .save("./newOut/_wolf_edge_kernelH.png");
+      .save("./Husker/Husker_edge_kernelH.png");
 
       //Sharpening
       float tune = 2f;
@@ -111,19 +137,19 @@ public class Main {
       sharpenKernelFloats[2] = new float[]{0,-1f/5f*tune,0};
       Kernel shapenKernel = new Kernel(sharpenKernelFloats);
 
-      new ICon("./images/wolf.jpg")
-      .exec(i->i.toGrayscale())
+      new ICon("./images/Husker.jpg")
+      
       .exec(i->i.applyKernel(shapenKernel))
-      .save("./newOut/_wolf_shapen_kernel.png");
+      .save("./Husker/Husker_sharpen_kernel.png");
 
-      new ICon("./images/wolf.jpg")
+      /*new ICon("./images/wolf.jpg")
       .exec(i->i.toGrayscale())
-      .save("./newOut/_wolf_bw.png");
+      .save("./newOut/_wolf_bw.png");*/
 
     }
 
 
-    // Get the number of colors in the image
+   /*  // Get the number of colors in the image
     new ICon("./images/wolf.jpg")
         .exec(l -> {
           colorCount.setValue(l.getColorCount());
@@ -141,7 +167,7 @@ public class Main {
     for (int i = 0; i < f.length && i < 10; i++) {
       Color c = f[i];
       System.out.println(c);
-    }
+    }*/
 
     // Mix of all different things
     new ICon("./images/wolf.jpg")
@@ -220,16 +246,16 @@ public class Main {
     }
 
     // Generate bit-sliced image at each distinct bit
-    if (true) {
+    /*if (true) {
       for (int inc = 0; inc < 8; inc++) {
         int a = inc;
-        new ICon("./images/moon.jpg")
+        new ICon("./images/sky.jpg")
             //.exec(i -> i.toGrayscale())
             .exec(i -> i.updateToPallette(helps.MyMath.getRandomColors(132)))
             .exec(i -> i.bitSlice((int) Math.pow(2, a)))
-            .save("./out/bitSlicing" + a + ".png");
+            .save("./Sky/bitSlicing" + a + ".png");
       }
-    }
+    }*/
 
     // Get the error values for cummulative bit slices
     if (false) {
