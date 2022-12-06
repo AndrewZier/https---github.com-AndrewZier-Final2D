@@ -33,7 +33,7 @@ public class Main {
 
     // Actual image
     // processing-----------------------------------------------------------------------------------------------------
-
+/*
     if(true){//Kernels
       float[][] identityKernel = new float[3][3];
       identityKernel[0] = new float[]{0,0,0};
@@ -84,12 +84,12 @@ public class Main {
       EdgeSharpenKernelFloats[2] = new float[]{1,1,1};
       
       Kernel EdgeSharpenKernel = new Kernel(EdgeSharpenKernelFloats).normalize();
-
       new ICon("./images/Husker.jpg")
-      
+     
+     
       .exec(i->i.applyKernel(EdgeSharpenKernel))
       .save("./Husker/Husker_EdgeSharpen_kernel.png");
-
+*/
       // Emboss
       float[][] EmbossKernelFloats = new float[3][3];
       EmbossKernelFloats[0] = new float[]{-1,0,1};
@@ -102,7 +102,7 @@ public class Main {
       
       .exec(i->i.applyKernel(EmbossKernel))
       .save("./Wolf/wolf_Emboss_kernel.png");
-
+/*
       //Larger Box Blur
       new ICon("./images/wolf.jpg")
       
@@ -147,7 +147,7 @@ public class Main {
       .save("./newOut/_wolf_bw.png");*/
 
     }
-
+*/
 
    /*  // Get the number of colors in the image
     new ICon("./images/wolf.jpg")
