@@ -144,7 +144,7 @@ public class Main {
 
       /*new ICon("./images/wolf.jpg")
       .exec(i->i.toGrayscale())
-      .save("./newOut/_wolf_bw.png");*/
+      .save("./newOut/_wolf_bw.png");
 
     }
 */
