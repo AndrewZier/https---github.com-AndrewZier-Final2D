@@ -579,9 +579,18 @@ public class IP extends IPBase {
                 int gray = (int) sum;
                 if(gray < 0) gray *= -1;
                 gray = Math.max(Math.min(255, gray), 0);
-
-            
-                intermediate.setRGB(x, y, new Color(gray, gray, gray).getRGB());
+                
+                
+                for (var j = 0; j < bh; j++){
+                    for (var i = 0; i < bw; i++){
+                        
+                        Color original = new Color(bufferedImage.getRGB(i, j));
+                        
+                        orig = Colors.getRGB(original.getRed(), original.getGreen(), original.getBlue());
+                        
+                    }
+                }
+                //intermediate.setRGB(x, y, new Color(gray, gray, gray).getRGB());
                 
             }
         }
