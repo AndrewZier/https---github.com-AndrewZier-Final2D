@@ -564,7 +564,8 @@ public class IP extends IPBase {
 
         for (int y = 0; y < bh; y++) {
             for (int x = 0; x < bw; x++) {
-                float sum = 0;
+                //RED
+                float sumR = 0;
                 for (int ky = -halfSizeY; ky <= halfSizeY; ky++) {
                     for (int kx = -halfSizeX; kx <= halfSizeX; kx++) {
                         int ix = Math.min(Math.max(x + kx, 0), bw - 1);
@@ -572,25 +573,49 @@ public class IP extends IPBase {
                         Color c = new Color(bufferedImage.getRGB(ix,iy));
                         int value = c.getRed();
                         float product = value * kernel.get(kx, ky);
-                        sum += product;
+                        sumR += product;
                     }
                 }
+                int r = (int) sumR;
+                if(r < 0) r *= -1;
+                r = Math.max(Math.min(255, r), 0);
+                
 
-                int gray = (int) sum;
-                if(gray < 0) gray *= -1;
-                gray = Math.max(Math.min(255, gray), 0);
-                
-                
-                for (var j = 0; j < bh; j++){
-                    for (var i = 0; i < bw; i++){
-                        
-                        Color original = new Color(bufferedImage.getRGB(i, j));
-                        
-                        orig = Colors.getRGB(original.getRed(), original.getGreen(), original.getBlue());
-                        
+                //GREEN
+                float sumG = 0;
+                for (int ky = -halfSizeY; ky <= halfSizeY; ky++) {
+                    for (int kx = -halfSizeX; kx <= halfSizeX; kx++) {
+                        int ix = Math.min(Math.max(x + kx, 0), bw - 1);
+                        int iy = Math.min(Math.max(y + ky, 0), bh - 1);
+                        Color c = new Color(bufferedImage.getRGB(ix,iy));
+                        int value = c.getGreen();
+                        float product = value * kernel.get(kx, ky);
+                        sumG += product;
                     }
                 }
-                //intermediate.setRGB(x, y, new Color(gray, gray, gray).getRGB());
+                int g = (int) sumG;
+                if(g < 0) g *= -1;
+                g = Math.max(Math.min(255, g), 0);
+
+
+                //BLUE
+                float sumB = 0;
+                for (int ky = -halfSizeY; ky <= halfSizeY; ky++) {
+                    for (int kx = -halfSizeX; kx <= halfSizeX; kx++) {
+                        int ix = Math.min(Math.max(x + kx, 0), bw - 1);
+                        int iy = Math.min(Math.max(y + ky, 0), bh - 1);
+                        Color c = new Color(bufferedImage.getRGB(ix,iy));
+                        int value = c.getBlue();
+                        float product = value * kernel.get(kx, ky);
+                        sumB += product;
+                    }
+                }
+                int b = (int) sumB;
+                if(b < 0) b *= -1;
+                b = Math.max(Math.min(255, b), 0);
+
+      
+                intermediate.setRGB(x, y, new Color(r, g, b).getRGB());
                 
             }
         }
